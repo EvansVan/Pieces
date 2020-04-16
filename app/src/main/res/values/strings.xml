@@ -1,4 +1,11 @@
 <resources>
 	<string name="app_name">Pieces</string>
 	<string name="todo">TODO</string>
+	<string name="Log_in">Log in</string>
+	<string name="password">password</string>
+	<string name="username">username</string>
+	<string name="not_a_registered_user_click_here_to_register">Not a registered user?? Click here to register</string>
+	<string name="register">Register</string>
+	<string name="confirm_password">Confirm Password</string>
+	<string name="email">Email</string>
 </resources>
