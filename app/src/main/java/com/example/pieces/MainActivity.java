@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
 	private FirebaseAuth mAuth;
 	RecyclerView animeRecycler;
-	ArrayList<Anime> animeList;
-	AnimeAdapter adapter;
+	private AnimeAdapter adapter;
+	private ArrayList<anime> AnimeList;
 	Context context;
 
 	@Override
@@ -57,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
 		animeRecycler.setLayoutManager(new LinearLayoutManager(this));
 		context = this;
 
-		mAuth = FirebaseAuth.getInstance();
+		AnimeList = new ArrayList<>();
 
-		animeList = new ArrayList<Anime>();
+		mAuth = FirebaseAuth.getInstance();
 
 		String url = "https://api.jikan.moe/v3/search/anime?q=onepiece&limit=5";
 
@@ -80,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
 										int score = obj.getInt("score");
 										String imageUrl = obj.getString("image_url");
 
-										animeList.add(new Anime(title,synopsis,score,imageUrl));
+										AnimeList.add(new anime(title,synopsis,imageUrl,score));
 									}
-									adapter = new AnimeAdapter(context,animeList);
+									adapter = new AnimeAdapter(MainActivity.this,AnimeList);
 									animeRecycler.setAdapter(adapter);
 								}
 
