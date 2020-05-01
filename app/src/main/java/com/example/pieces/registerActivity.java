@@ -1,10 +1,14 @@
 package com.example.pieces;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,13 +22,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import static com.example.pieces.R.id.choice1;
 
 public class registerActivity  extends AppCompatActivity {
 
-	EditText username, password, email, confirmpass;
+	EditText username, password, email, confirmpass, choice1, choice2, choice3;
 	Button register;
 	Context context;
 	private FirebaseAuth mAuth;
+	DatabaseReference db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +42,7 @@ public class registerActivity  extends AppCompatActivity {
 
 		context = this;
 		mAuth = FirebaseAuth.getInstance();
+		db = FirebaseDatabase.getInstance().getReference().child("Users");
 
 		username = findViewById(R.id.username);
 		password = findViewById(R.id.password );
@@ -55,7 +65,7 @@ public class registerActivity  extends AppCompatActivity {
 					Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT)
 									.show();
 				} else if(passString.equals(confirmString)) {
-					registerUser(emailString, passString);
+					registerUser(userString, emailString, passString);
 				} else {
 					Toast.makeText(context, "Confirm password does not match password", Toast.LENGTH_SHORT)
 									.show();
@@ -64,16 +74,37 @@ public class registerActivity  extends AppCompatActivity {
 		});
 	}
 
-	private void registerUser(String emailString, String passString) {
+	private void registerUser(final String userName, final String emailString, String passString) {
 		mAuth.createUserWithEmailAndPassword(emailString, passString)
 						.addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 							@Override
 							public void onComplete(@NonNull Task<AuthResult> task) {
 								if(task.isSuccessful()){
 									Log.d("tag_reg","Registration successful");
-									FirebaseUser currrentUser = mAuth.getCurrentUser();
-									startActivity(new Intent(context,MainActivity.class));
-									finish();
+									final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+									LayoutInflater inflater = getLayoutInflater();
+									final View view = inflater.inflate(R.layout.userdialog,null);
+									builder.setView(view)
+													.setTitle("Fandom")
+													.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+														@Override
+														public void onClick(DialogInterface dialog, int which) {
+															choice1 = view.findViewById(R.id.choice1);
+														  choice2 = view.findViewById(R.id.choice2);
+														  choice3 = view.findViewById(R.id.choice3);
+
+															FirebaseUser currentUser = mAuth.getCurrentUser();
+															final DatabaseReference userDb = db.child(currentUser.getUid());
+															userDb.child("Username").setValue(userName);
+															userDb.child("Email").setValue(emailString);
+															userDb.child("Pick1").setValue(choice1);
+															userDb.child("Pick2").setValue(choice2);
+															userDb.child("Pick3").setValue(choice3);
+															startActivity(new Intent(context,MainActivity.class));
+
+														}
+													})
+													.show();
 								}else{
 									Toast.makeText(context, "something went wrong", Toast.LENGTH_SHORT).show();
 							}

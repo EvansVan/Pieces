@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item android:id="@+id/signout" android:title="@string/Logout"/>
+	<item android:id="@+id/search" android:title=""
+			app:showAsAction="ifRoom"
+			android:icon="@mipmap/search_round"/>
+	<item android:id="@+id/profile" android:title=""
+			app:showAsAction="ifRoom"
+			android:icon="@drawable/person_icon"/>
+</menu>

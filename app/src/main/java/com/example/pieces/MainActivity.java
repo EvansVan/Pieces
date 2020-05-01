@@ -1,5 +1,6 @@
 package com.example.pieces;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import androidx.appcompat.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 	private AnimeAdapter adapter;
 	private ArrayList<anime> AnimeList;
 	Context context;
+	Toolbar toolbar;
 
 	@Override
 	protected void onStart() {
@@ -51,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		toolbar = findViewById(R.id.appbar);
+		setSupportActionBar(toolbar);
 
 		animeRecycler =findViewById(R.id.animeView);
 		animeRecycler.setHasFixedSize(true);
@@ -98,5 +108,23 @@ public class MainActivity extends AppCompatActivity {
 							}
 						});
 		queue.add(request);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu,menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+		switch(item.getItemId()){
+			case R.id.search:
+				Toast.makeText(context,"title",Toast.LENGTH_SHORT).show();
+			case R. id.signout:
+				startActivity(new Intent(context,loginActivity.class));
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

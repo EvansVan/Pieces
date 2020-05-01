@@ -8,4 +8,10 @@
 	<string name="register">Register</string>
 	<string name="confirm_password">Confirm Password</string>
 	<string name="email">Email</string>
+	<string name="title">title</string>
+	<string name="Logout">Logout</string>
+	<string name="topics">Topics</string>
+	<string name="what_anime_peak_you_interests">What anime peak you interests???</string>
+	<string name="what_anime_pique_your_interests">What anime pique your interests??</string>
+	<string name="whats_gooing_on">Whats gooing on</string>
 </resources>

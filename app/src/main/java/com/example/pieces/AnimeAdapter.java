@@ -31,16 +31,11 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.AnimeViewHol
 	@Override
 	public void onBindViewHolder(@NonNull AnimeViewHolder holder, int position) {
 		anime currentItem = AnimeList.get(position);
-
-		String imageUrl = currentItem.getImageUrl();
-		String title = currentItem.getTitle();
-		String synopsis = currentItem.getSynopsis();
-		int score = currentItem.getScore();
-
-		holder.title.setText(title);
-		holder.synopsis.setText(synopsis);
-		holder.score.setText(String.valueOf(score));
-		Picasso.get().load(imageUrl).fit().centerInside().into(holder.animePic);
+		
+		holder.title.setText(currentItem.getTitle());
+		holder.synopsis.setText(currentItem.getSynopsis());
+		holder.score.setText(String.valueOf(currentItem.getScore()));
+		Picasso.get().load(currentItem.getImageUrl()).fit().centerInside().into(holder.animePic);
 	}
 
 	@Override
