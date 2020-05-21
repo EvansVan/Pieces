@@ -122,8 +122,14 @@ public class MainActivity extends AppCompatActivity {
 		switch(item.getItemId()){
 			case R.id.search:
 				Toast.makeText(context,"title",Toast.LENGTH_SHORT).show();
+				break;
 			case R. id.signout:
+				FirebaseAuth.getInstance().signOut();
 				startActivity(new Intent(context,loginActivity.class));
+				break;
+			case R. id.menu_profile:
+				startActivity(new Intent(context,profileActivity.class));
+				break;
 		}
 		return super.onOptionsItemSelected(item);
 	}

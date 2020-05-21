@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+	<de.hdodenhof.circleimageview.CircleImageView
+			android:id="@+id/profileImg"
+			android:layout_width="300dp"
+			android:layout_height="300dp"
+			android:layout_alignParentTop="true"
+			android:layout_centerHorizontal="true"
+			android:src="@drawable/person_icon"/>
+
+	<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/lytProfile_username"
+			android:background="@drawable/rndbtn"
+			android:layout_below="@+id/profileImg"
+			android:layout_marginTop="15dp"
+			android:textAlignment="center"
+			android:gravity="center"
+			android:text="@string/username"
+			android:textSize="24sp"/>
+
+	<!-- TODO: add delete and edit buttons -->
+
+	<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/lytProfile_email"
+			android:background="@drawable/rndbtn"
+			android:layout_below="@+id/lytProfile_username"
+			android:layout_marginTop="15dp"
+			android:textAlignment="center"
+			android:gravity="center"
+			android:text="@string/email"
+			android:textSize="24sp" />
+
+	<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/pick1"
+			android:layout_below="@+id/lytProfile_email"
+			android:layout_marginTop="15dp"
+			android:background="@drawable/rndbtn"
+			android:textAlignment="center"
+			android:gravity="center"
+			android:text="@string/pick1"
+			android:textSize="24sp" />
+
+	<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/pick2"
+			android:layout_below="@+id/pick1"
+			android:layout_marginTop="15dp"
+			android:gravity="center"
+			android:background="@drawable/rndbtn"
+			android:textAlignment="center"
+			android:text="@string/pick2"
+			android:textSize="24sp"/>
+
+	<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@drawable/rndbtn"
+			android:id="@+id/pick3"
+			android:layout_below="@+id/pick2"
+			android:layout_marginTop="15dp"
+			android:textAlignment="center"
+			android:gravity="center"
+			android:text= "@string/pick3"
+			android:textSize="24sp"/>
+
+	<Button
+			android:id="@+id/edit"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/pick3"
+			android:onClick="saveClicked"
+			android:layout_marginStart="170dp"
+			android:layout_marginTop="10dp"
+			android:text="@string/edit"
+			android:layout_marginLeft="170dp" />
+</RelativeLayout>

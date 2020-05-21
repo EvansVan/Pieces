@@ -23,31 +23,40 @@
 	<EditText
 			android:id="@+id/choice1"
 			android:layout_width="377dp"
+			android:paddingLeft="20dp"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="24dp"
 			android:hint="@string/whats_gooing_on"
 			android:lines="1"
+			android:inputType="text"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.529"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/Interest" />
+			app:layout_constraintTop_toBottomOf="@+id/Interest"
+			android:importantForAutofill="no"
+			android:paddingStart="20dp" />
 
 	<EditText
 			android:id="@+id/choice2"
 			android:layout_width="377dp"
+			android:paddingLeft="20dp"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="24dp"
 			android:hint="@string/whats_gooing_on"
 			android:lines="1"
+			android:inputType="text"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/choice1" />
+			app:layout_constraintTop_toBottomOf="@+id/choice1"
+			android:importantForAutofill="no"
+			android:paddingStart="20dp" />
 
 	<EditText
 			android:id="@+id/choice3"
 			android:layout_width="377dp"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="24dp"
+			android:paddingLeft="20dp"
 			android:hint="@string/whats_gooing_on"
 			android:lines="1"
 			app:layout_constraintBottom_toBottomOf="parent"
@@ -55,6 +64,9 @@
 			app:layout_constraintHorizontal_bias="0.47"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/choice2"
-			app:layout_constraintVertical_bias="0.0" />
+			app:layout_constraintVertical_bias="0.0"
+			android:inputType="text"
+			android:importantForAutofill="no"
+			android:paddingStart="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

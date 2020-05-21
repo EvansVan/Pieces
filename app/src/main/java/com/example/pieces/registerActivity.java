@@ -44,9 +44,9 @@ public class registerActivity  extends AppCompatActivity {
 		mAuth = FirebaseAuth.getInstance();
 		db = FirebaseDatabase.getInstance().getReference().child("Users");
 
-		username = findViewById(R.id.username);
+		username = findViewById(R.id.lytRegister_username);
 		password = findViewById(R.id.password );
-		email = findViewById(R.id.email);
+		email = findViewById(R.id.lytRegister_email);
 		confirmpass = findViewById(R.id.confirm_password);
 		register = findViewById(R.id.register);
 
@@ -84,27 +84,30 @@ public class registerActivity  extends AppCompatActivity {
 									final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 									LayoutInflater inflater = getLayoutInflater();
 									final View view = inflater.inflate(R.layout.userdialog,null);
-									builder.setView(view)
-													.setTitle("Fandom")
-													.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-														@Override
-														public void onClick(DialogInterface dialog, int which) {
-															choice1 = view.findViewById(R.id.choice1);
-														  choice2 = view.findViewById(R.id.choice2);
-														  choice3 = view.findViewById(R.id.choice3);
+									builder.setView(view);
+									builder.setTitle("Fandom");
+									builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											choice1 = view.findViewById(R.id.choice1);
+											choice2 = view.findViewById(R.id.choice2);
+											choice3 = view.findViewById(R.id.choice3);
 
-															FirebaseUser currentUser = mAuth.getCurrentUser();
-															final DatabaseReference userDb = db.child(currentUser.getUid());
-															userDb.child("Username").setValue(userName);
-															userDb.child("Email").setValue(emailString);
-															userDb.child("Pick1").setValue(choice1);
-															userDb.child("Pick2").setValue(choice2);
-															userDb.child("Pick3").setValue(choice3);
-															startActivity(new Intent(context,MainActivity.class));
+											String anime1 = choice1.getText().toString();
+											String anime2 = choice2.getText().toString();
+											String anime3 = choice3.getText().toString();
 
-														}
-													})
-													.show();
+											FirebaseUser currentUser = mAuth.getCurrentUser();
+											final DatabaseReference userDb = db.child(currentUser.getUid());
+											userDb.child("Username").setValue(userName);
+											userDb.child("Email").setValue(emailString);
+											userDb.child("Pick1").setValue(anime1);
+											userDb.child("Pick2").setValue(anime2);
+											userDb.child("Pick3").setValue(anime3);
+											startActivity(new Intent(context, MainActivity.class));
+										}
+									});
+									builder.show();
 								}else{
 									Toast.makeText(context, "something went wrong", Toast.LENGTH_SHORT).show();
 							}

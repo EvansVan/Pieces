@@ -3,7 +3,7 @@
 	<string name="todo">TODO</string>
 	<string name="Log_in">Log in</string>
 	<string name="password">password</string>
-	<string name="username">username</string>
+	<string name="username">Username</string>
 	<string name="not_a_registered_user_click_here_to_register">Not a registered user?? Click here to register</string>
 	<string name="register">Register</string>
 	<string name="confirm_password">Confirm Password</string>
@@ -14,4 +14,11 @@
 	<string name="what_anime_peak_you_interests">What anime peak you interests???</string>
 	<string name="what_anime_pique_your_interests">What anime pique your interests??</string>
 	<string name="whats_gooing_on">Whats gooing on</string>
+	<string name="profile_name">Profile Name</string>
+	<string name="pick1">1st pick</string>
+	<string name="pick2">2nd pick</string>
+	<string name="pick3">3rd pick</string>
+	<string name="save">Save</string>
+	<string name="edit">Edit</string>
+	<string name="delete">delete</string>
 </resources>

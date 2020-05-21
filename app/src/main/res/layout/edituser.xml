@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+	<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/lytEdit_username"
+			android:background="@drawable/rndbtn"
+			android:layout_marginTop="15dp"
+			android:textAlignment="center"
+			android:hint="@string/username"
+			android:gravity="center"
+			android:importantForAutofill="no"
+			android:inputType="text"
+			android:textSize="24sp"/>
+
+	<!-- TODO: add delete and edit buttons -->
+
+	<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:importantForAutofill="no"
+			android:inputType="textEmailAddress"
+			android:id="@+id/lytEdit_email"
+			android:hint="@string/email"
+			android:background="@drawable/rndbtn"
+			android:layout_below="@+id/lytEdit_username"
+			android:layout_marginTop="15dp"
+			android:textAlignment="center"
+			android:gravity="center"
+			android:textSize="24sp" />
+
+	<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/editPick1"
+			android:layout_below="@+id/lytEdit_email"
+			android:layout_marginTop="15dp"
+			android:background="@drawable/rndbtn"
+			android:textAlignment="center"
+			android:gravity="center"
+			android:textSize="24sp"
+			android:importantForAutofill="no"
+			android:inputType="text" />
+
+	<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/editPick2"
+			android:layout_below="@+id/editPick1"
+			android:layout_marginTop="15dp"
+			android:gravity="center"
+			android:background="@drawable/rndbtn"
+			android:textAlignment="center"
+			android:hint="@string/pick2"
+			android:importantForAutofill="no"
+			android:inputType="text"
+			android:textSize="24sp"/>
+
+	<EditText
+			android:layout_width="match_parent"
+			android:importantForAutofill="no"
+			android:inputType="text"
+			android:layout_height="wrap_content"
+			android:background="@drawable/rndbtn"
+			android:id="@+id/editPick3"
+			android:layout_below="@+id/editPick2"
+			android:layout_marginTop="15dp"
+			android:textAlignment="center"
+			android:gravity="center"
+			android:hint="@string/pick3"
+			android:textSize="24sp"/>
+
+</RelativeLayout>
