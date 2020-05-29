@@ -74,6 +74,7 @@ public class registerActivity  extends AppCompatActivity {
 		});
 	}
 
+	//Method to register new user using username and email
 	private void registerUser(final String userName, final String emailString, String passString) {
 		mAuth.createUserWithEmailAndPassword(emailString, passString)
 						.addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -81,6 +82,8 @@ public class registerActivity  extends AppCompatActivity {
 							public void onComplete(@NonNull Task<AuthResult> task) {
 								if(task.isSuccessful()){
 									Log.d("tag_reg","Registration successful");
+
+									//If registration is successful the user is asked to enter a choice of their best shows/manga/comics in a custom dialog details are captured to the db
 									final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 									LayoutInflater inflater = getLayoutInflater();
 									final View view = inflater.inflate(R.layout.userdialog,null);

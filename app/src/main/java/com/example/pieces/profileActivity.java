@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +40,8 @@ public class profileActivity extends AppCompatActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
+
+		//populate the text views with database values when the activity starts
 		db.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -78,40 +82,51 @@ public class profileActivity extends AppCompatActivity {
 		mAuth = FirebaseAuth.getInstance();
 		currentUser = mAuth.getCurrentUser().getUid();
 		db = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser);
-	}
 
-	private void saveClicked(View view) {
-		final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		LayoutInflater inflater = getLayoutInflater();
-		final View view1 = inflater.inflate(R.layout.edituser, null);
-		builder.setView(view);
-		builder.setTitle("Update User");
-		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		edit.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
+			public void onClick(View v) {
+				final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				LayoutInflater inflater = getLayoutInflater();
+				final View editView = inflater.inflate(R.layout.edituser, null);
+				builder.setView(editView);
+				builder.setTitle("Update User");
+				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
 
-				choice1 = view1.findViewById(R.id.editPick1);
-				choice2 = view1.findViewById(R.id.editPick2);
-				choice3 = view1.findViewById(R.id.editPick3);
-				newUser = view1.findViewById(R.id.lytEdit_username);
-				newEmail = view1.findViewById(R.id.lytEdit_email);
+						choice1 = editView.findViewById(R.id.editPick1);
+						choice2 = editView.findViewById(R.id.editPick2);
+						choice3 = editView.findViewById(R.id.editPick3);
+						newUser = editView.findViewById(R.id.lytEdit_username);
+						newEmail = editView.findViewById(R.id.lytEdit_email);
 
-				String updateUser = newUser.getText().toString();
-				String updateEmail = newEmail.getText().toString();
-				String anime1 = choice1.getText().toString();
-				String anime2 = choice2.getText().toString();
-				String anime3 = choice3.getText().toString();
+						String updateUser = newUser.getText().toString();
+						String updateEmail = newEmail.getText().toString();
+						String anime1 = choice1.getText().toString();
+						String anime2 = choice2.getText().toString();
+						String anime3 = choice3.getText().toString();
 
-				FirebaseUser currentUser = mAuth.getCurrentUser();
-				final DatabaseReference userDb = db.child(currentUser.getUid());
-				userDb.child("Username").setValue(updateUser);
-				userDb.child("Email").setValue(updateEmail);
-				userDb.child("Pick1").setValue(anime1);
-				userDb.child("Pick2").setValue(anime2);
-				userDb.child("Pick3").setValue(anime3);
-				startActivity(new Intent(context, profileActivity.class));
+						if(TextUtils.isEmpty(updateUser) ||
+										TextUtils.isEmpty(updateEmail) ||
+										TextUtils.isEmpty(anime1) ||
+										TextUtils.isEmpty(anime2) ||
+										TextUtils.isEmpty(anime3)) {
+							Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT)
+											.show();
+						} else {
+							db.child("Username").setValue(updateUser);
+							db.child("Email").setValue(updateEmail);
+							db.child("Pick1").setValue(anime1);
+							db.child("Pick2").setValue(anime2);
+							db.child("Pick3").setValue(anime3);
+							startActivity(new Intent(context, profileActivity.class));
+					}
+				}
+								});
+			builder.show();
 			}
 		});
-		builder.show();
 	}
 }
+

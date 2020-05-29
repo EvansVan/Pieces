@@ -17,8 +17,6 @@
 			android:inputType="text"
 			android:textSize="24sp"/>
 
-	<!-- TODO: add delete and edit buttons -->
-
 	<EditText
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -42,6 +40,7 @@
 			android:background="@drawable/rndbtn"
 			android:textAlignment="center"
 			android:gravity="center"
+			android:hint="@string/pick1"
 			android:textSize="24sp"
 			android:importantForAutofill="no"
 			android:inputType="text" />

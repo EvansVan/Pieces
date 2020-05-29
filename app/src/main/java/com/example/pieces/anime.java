@@ -1,5 +1,6 @@
 package com.example.pieces;
 
+//Anime class to create entries for new anime
 public class anime {
 	private String title, synopsis, imageUrl;
 	private int score;

@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:app="http://schemas.android.com/apk/res-auto"
-		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
 		android:background="@color/colorPrimary"
 		android:layout_height="match_parent"
@@ -14,16 +13,18 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="28dp"
 			android:textSize="16sp"
+			android:paddingLeft="40dp"
 			android:text="@string/what_anime_pique_your_interests"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.47"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent" />
+			app:layout_constraintTop_toTopOf="parent"
+			android:paddingStart="40dp" />
 
 	<EditText
 			android:id="@+id/choice1"
 			android:layout_width="377dp"
-			android:paddingLeft="20dp"
+			android:paddingLeft="40dp"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="24dp"
 			android:hint="@string/whats_gooing_on"
@@ -34,12 +35,12 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/Interest"
 			android:importantForAutofill="no"
-			android:paddingStart="20dp" />
+			android:paddingStart="40dp" />
 
 	<EditText
 			android:id="@+id/choice2"
 			android:layout_width="377dp"
-			android:paddingLeft="20dp"
+			android:paddingLeft="40dp"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="24dp"
 			android:hint="@string/whats_gooing_on"
@@ -49,14 +50,14 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/choice1"
 			android:importantForAutofill="no"
-			android:paddingStart="20dp" />
+			android:paddingStart="40dp" />
 
 	<EditText
 			android:id="@+id/choice3"
 			android:layout_width="377dp"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="24dp"
-			android:paddingLeft="20dp"
+			android:paddingLeft="40dp"
 			android:hint="@string/whats_gooing_on"
 			android:lines="1"
 			app:layout_constraintBottom_toBottomOf="parent"
@@ -67,6 +68,6 @@
 			app:layout_constraintVertical_bias="0.0"
 			android:inputType="text"
 			android:importantForAutofill="no"
-			android:paddingStart="20dp" />
+			android:paddingStart="40dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
+		//call method to check that the user is logged in
 		checkAuth();
 	}
 
+	//Method to check if user is logged in if not back to login page with them
 	private void checkAuth() {
 		FirebaseUser currentuser = mAuth.getCurrentUser();
-
 		if (currentuser == null){
 			startActivity(new Intent(context,loginActivity.class));
 		}
@@ -59,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		//addition of custom menu bar
 		toolbar = findViewById(R.id.appbar);
 		setSupportActionBar(toolbar);
 
+		//Recycler view to hold anime entries
 		animeRecycler =findViewById(R.id.animeView);
 		animeRecycler.setHasFixedSize(true);
 		animeRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -71,10 +74,11 @@ public class MainActivity extends AppCompatActivity {
 
 		mAuth = FirebaseAuth.getInstance();
 
+		//Url containing json information to be displayed
 		String url = "https://api.jikan.moe/v3/search/anime?q=onepiece&limit=5";
 
+		//volley request to get data and populate anime list
 		RequestQueue queue = Volley.newRequestQueue(context);
-
 		JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
 						new Response.Listener<JSONObject>() {
 							@Override
@@ -110,13 +114,13 @@ public class MainActivity extends AppCompatActivity {
 		queue.add(request);
 	}
 
+	//method to create and toggle operations on the menu bar
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu,menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-
 	@Override
 	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		switch(item.getItemId()){
