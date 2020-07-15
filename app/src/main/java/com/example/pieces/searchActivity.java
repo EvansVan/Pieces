@@ -1,4 +1,6 @@
 package com.example.pieces;
 
-public class searchActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class searchActivity extends AppCompatActivity {
 }

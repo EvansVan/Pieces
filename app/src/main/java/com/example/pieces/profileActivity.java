@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,8 +32,9 @@ public class profileActivity extends AppCompatActivity {
 	ImageView profileImg;
 	EditText choice1,choice2, choice3, newUser, newEmail;
 	TextView Username, Email , Pick1, Pick2, Pick3;
-	Button edit;
+	Button edit, delete;
 	private FirebaseAuth mAuth;
+	FirebaseUser userDeets;
 	DatabaseReference db;
 	private String currentUser;
 	Context context;
@@ -78,10 +81,25 @@ public class profileActivity extends AppCompatActivity {
 		Pick2 = findViewById(R.id.pick2);
 		Pick3 = findViewById(R.id.pick3);
 		edit = findViewById(R.id.edit);
+		delete = findViewById(R.id.delete);
 
 		mAuth = FirebaseAuth.getInstance();
+		userDeets = mAuth.getCurrentUser();
 		currentUser = mAuth.getCurrentUser().getUid();
 		db = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser);
+
+		delete.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				userDeets.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+					@Override
+					public void onComplete(@NonNull Task<Void> task) {
+						Toast.makeText(context,"account deleted",Toast.LENGTH_LONG).show();
+						startActivity(new Intent(context, loginActivity.class));
+					}
+				});
+			}
+		});
 
 		edit.setOnClickListener(new View.OnClickListener() {
 			@Override
