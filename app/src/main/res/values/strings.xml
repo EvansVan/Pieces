@@ -22,4 +22,6 @@
 	<string name="edit">Edit</string>
 	<string name="delete">delete</string>
 	<string name="search_hint">What are you looking for</string>
+	<string name="enter_anime_tings">Enter anime tings</string>
+	<string name="search">Search</string>
 </resources>

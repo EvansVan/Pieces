@@ -91,15 +91,33 @@ public class profileActivity extends AppCompatActivity {
 		delete.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				userDeets.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+				AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+				dialog.setTitle("Are you sure??");
+				dialog.setMessage("Deleting this account will result in all your details being completely" +
+								" removed and your account closed. You will no longer be able to access the app.");
+				dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 					@Override
-					public void onComplete(@NonNull Task<Void> task) {
-						Toast.makeText(context,"account deleted",Toast.LENGTH_LONG).show();
-						startActivity(new Intent(context, loginActivity.class));
+					public void onClick(DialogInterface dialog, int which) {
+						userDeets.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+							@Override
+							public void onComplete(@NonNull Task<Void> task) {
+								Toast.makeText(context,"account deleted",Toast.LENGTH_LONG).show();
+								startActivity(new Intent(context, loginActivity.class));
+							}
+				});
 					}
 				});
+				dialog.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+				AlertDialog alertDialog = dialog.create();
+				alertDialog.show();
 			}
 		});
+
 
 		edit.setOnClickListener(new View.OnClickListener() {
 			@Override

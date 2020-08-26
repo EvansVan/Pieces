@@ -67,17 +67,16 @@ public class MainActivity extends AppCompatActivity {
 		setSupportActionBar(toolbar);
 
 		//Recycler view to hold anime entries
-		animeRecycler =findViewById(R.id.animeView);
+		animeRecycler = findViewById(R.id.animeView);
 		animeRecycler.setHasFixedSize(true);
 		animeRecycler.setLayoutManager(new LinearLayoutManager(this));
 		context = this;
 
 		AnimeList = new ArrayList<>();
-
 		mAuth = FirebaseAuth.getInstance();
 
 		//Url containing json information to be displayed
-		String url = "https://api.jikan.moe/v3/search/anime?q=onepiece&limit=5";
+		String url = "https://api.jikan.moe/v3/top/anime/1/upcoming";
 
 		//volley request to get data and populate anime list
 		RequestQueue queue = Volley.newRequestQueue(context);
@@ -87,18 +86,18 @@ public class MainActivity extends AppCompatActivity {
 							public void onResponse(JSONObject response) {
 								try {
 
-									JSONArray jsonArray = response.getJSONArray("results");
+									JSONArray jsonArray = response.getJSONArray("top");
 									for(int i=0;i<jsonArray.length();i++){
 										JSONObject obj = jsonArray.getJSONObject(i);
 
 										String title = obj.getString("title");
-										String synopsis = obj.getString("synopsis");
+										String synopsis = obj.getString("start_date");
 										int score = obj.getInt("score");
 										String imageUrl = obj.getString("image_url");
 
 										AnimeList.add(new anime(title,synopsis,imageUrl,score));
 									}
-									adapter = new AnimeAdapter(MainActivity.this,AnimeList);
+									adapter = new AnimeAdapter(context,AnimeList);
 									animeRecycler.setAdapter(adapter);
 								}
 
@@ -115,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
 						});
 		queue.add(request);
 	}
-
 	//method to create and toggle operations on the menu bar
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -127,8 +125,61 @@ public class MainActivity extends AppCompatActivity {
 						(SearchView) menu.findItem(R.id.search).getActionView();
 		searchView.setSearchableInfo(
 						searchManager.getSearchableInfo(getComponentName()));
+
+		//method to retrieve api data when the user presses submit
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				final String api_url = "https://api.jikan.moe/v3/search/";
+				AnimeList.clear();
+				adapter = new AnimeAdapter(context,AnimeList);
+				animeRecycler.setAdapter(adapter);
+				String url = api_url + "anime?q=" + query + "&limit=5" ;
+
+				//volley request to get data and populate anime list
+				RequestQueue queue = Volley.newRequestQueue(context);
+				JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+								new Response.Listener<JSONObject>() {
+									@Override
+									public void onResponse(JSONObject response) {
+										try {
+											JSONArray jsonArray = response.getJSONArray("results");
+											for(int i=0;i<jsonArray.length();i++) {
+												JSONObject obj = jsonArray.getJSONObject(i);
+
+												String title = obj.getString("title");
+												String synopsis = obj.getString("synopsis");
+												int score = obj.getInt("score");
+												String imageUrl = obj.getString("image_url");
+
+												AnimeList.add(new anime(title, synopsis, imageUrl, score));
+											}
+											adapter = new AnimeAdapter(context,AnimeList);
+											animeRecycler.setAdapter(adapter);
+										}
+										catch (JSONException ex){
+											Log.e("JsonParser Example","unexpected JSON exception", ex);
+										}
+									}
+								},
+								new Response.ErrorListener() {
+									@Override
+									public void onErrorResponse(VolleyError error) {
+										error.printStackTrace();
+									}
+								});
+				queue.add(request);
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				return true;
+			}
+		});
 		return super.onCreateOptionsMenu(menu);
-	}
+
+	}   
 	@Override
 	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		switch(item.getItemId()){
