@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 				return true;
 			}
 		});
-		return super.onCreateOptionsMenu(menu);
+		return supadb shell recovery --wipe_dataer.onCreateOptionsMenu(menu);
 
 	}   
 	@Override
